@@ -8,19 +8,25 @@ import {
   ImageBackground,
   Keyboard,
   Alert,
+  TouchableOpacity,
   Image
 } from 'react-native';
-import { Spinner, Button, Item, Input, Icon, Thumbnail } from 'native-base';
+import { Spinner, Button, Item, Input, Icon, Badge } from 'native-base';
+import ImagePicker from 'react-native-image-picker';
 
 export default class SignUp extends Component {
+  static navigationOptions = {
+    header: null
+  }
+
   constructor(props) {
     super(props);
     this.state = {
+      avatar: '',
       name: '',
       email: '',
       password: '',
       repassword: '',
-    //   number: '',
       loading: false
     };
   }
@@ -36,6 +42,35 @@ export default class SignUp extends Component {
        this.setState({ loading: false });
     }
     // Alert.alert(email, password);
+  }
+
+  onImagePress = () => {
+    const options = {
+      title: 'Select Avatar',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        // const source = { uri: response.uri };
+    
+        // You can also display the image using data:
+        const source = { uri: `data:image/jpeg;base64,${response.data}` };
+    
+        this.setState({
+          avatar: source,
+        });
+      }
+    });
   }
 
   validateEmail = (email) => {
@@ -76,7 +111,13 @@ export default class SignUp extends Component {
             opacity: 0.7
           }}
         />
-         <Thumbnail large source={require('../images/riley.jpg')} />
+          <TouchableOpacity onPress={this.onImagePress}>
+          {
+            this.state.avatar === '' ? <Image circle style={{ borderRadius: 50, width: 100, height: 100 }} source={require('../images/riley.jpg')} /> :
+            this.state.avatar !== '' && <Image circle style={{ borderRadius: 50, width: 100, height: 100 }} source={this.state.avatar} />
+          }
+          <Badge style={{ position: 'absolute' }}><Text>2</Text></Badge>
+          </TouchableOpacity>
         {/* <Image style={styles.logoImage} source={require('../images/lens.png')} /> */}
         {/* <Text style={styles.logo}>Snapppy</Text> */}
         {/* <Text style={styles.subtitle}>Capture your life!</Text> */}

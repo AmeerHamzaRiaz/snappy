@@ -12,7 +12,11 @@ import {
 } from 'react-native';
 import { Spinner, Button, Item, Input, Icon } from 'native-base';
 
-export default class Login extends Component {
+export default class Login extends Component { 
+  static navigationOptions = {
+    header: null
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -126,7 +130,10 @@ export default class Login extends Component {
           </Item>
           {this.renderButton()}
         </KeyboardAvoidingView>
-        <Text style={styles.signup}>Don't have account? Sign Up</Text>
+        <Text 
+          onPress={() => this.props.navigation.navigate('SignUp')} 
+          style={styles.signup}>Don't have account? Sign Up
+        </Text>
         {/* <Text style={styles.signupBlue}>Sign Up</Text> */}
 
       </ImageBackground>
