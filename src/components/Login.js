@@ -11,11 +11,16 @@ import {
   Image
 } from 'react-native';
 import { Spinner, Button, Item, Input, Icon } from 'native-base';
+import SignUp from './SignUp';
+
+const BLUE_COLOR = '#3498db';
+const BLUE_STATUS = '#2980b9';
 
 export default class Login extends Component { 
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     header: null
-  }
+})
+
 
   constructor(props) {
     super(props);
@@ -46,7 +51,7 @@ export default class Login extends Component {
 
   renderButton() {
     if (this.state.loading) {
-      return <Spinner size='large' color="#2980b9" />;
+      return <Spinner size='large' color={BLUE_COLOR} />;
     }
     return (
       <Button
@@ -69,7 +74,7 @@ export default class Login extends Component {
         source={require('../images/selfie.jpg')}
         style={styles.bg}
       >
-        <StatusBar backgroundColor="#2980b9" />
+        <StatusBar backgroundColor={BLUE_STATUS} />
         <View
           style={{
             ...StyleSheet.absoluteFillObject,
@@ -93,7 +98,7 @@ export default class Login extends Component {
               backgroundColor: 'rgba(0,0,0,0.4)'
             }}
           >
-            <Icon active name="at" style={{ color: '#2980b9' }} />
+            <Icon active name="at" style={{ color: BLUE_COLOR }} />
             <Input
               onChangeText={email =>
                 this.setState({ email: email })
@@ -114,7 +119,7 @@ export default class Login extends Component {
               backgroundColor: 'rgba(0,0,0,0.4)'
             }}
           >
-            <Icon active name="key" style={{ color: '#2980b9' }} />
+            <Icon active name="key" style={{ color: BLUE_COLOR }} />
             <Input
               onChangeText={pass =>
                 this.setState({ password: pass })
@@ -132,7 +137,9 @@ export default class Login extends Component {
         </KeyboardAvoidingView>
         <Text 
           onPress={() => this.props.navigation.navigate('SignUp')} 
-          style={styles.signup}>Don't have account? Sign Up
+          style={styles.signup}
+        >
+          Don't have account? Sign Up
         </Text>
         {/* <Text style={styles.signupBlue}>Sign Up</Text> */}
 
@@ -168,7 +175,7 @@ const styles = StyleSheet.create({
   logo: {
     fontSize: 52,
     textAlign: 'center',
-    color: '#2980b9',
+    color: BLUE_COLOR,
     fontFamily: 'Lobster-Regular'
   },
   subtitle: {
@@ -185,13 +192,13 @@ const styles = StyleSheet.create({
   },
   signupBlue: {
     textAlign: 'center',
-    color: '#2980b9',
+    color: BLUE_COLOR,
     marginTop: 20,
     fontSize: 16
   },
   button: {
     marginTop: 20,
     width: 250,
-    backgroundColor: '#2980b9'
+    backgroundColor: BLUE_COLOR
   }
 });

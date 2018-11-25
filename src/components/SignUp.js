@@ -14,9 +14,16 @@ import {
 import { Spinner, Button, Item, Input, Icon, Badge } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 
+const BLUE_STATUS = '#2980b9';
+const BLUE_COLOR = '#3498db';
+
 export default class SignUp extends Component {
   static navigationOptions = {
-    header: null
+    title: 'Register',
+    headerStyle: {
+      backgroundColor: BLUE_COLOR,
+    },
+    headerTintColor: '#fff',
   }
 
   constructor(props) {
@@ -80,7 +87,7 @@ export default class SignUp extends Component {
 
   renderButton() {
     if (this.state.loading) {
-      return <Spinner size='large' color="#2980b9" />;
+      return <Spinner size='large' color={BLUE_COLOR} />;
     }
     return (
       <Button
@@ -103,7 +110,7 @@ export default class SignUp extends Component {
         source={require('../images/selfie.jpg')}
         style={styles.bg}
       >
-        <StatusBar backgroundColor="#2980b9" />
+        <StatusBar backgroundColor={BLUE_STATUS} />
         <View
           style={{
             ...StyleSheet.absoluteFillObject,
@@ -116,7 +123,9 @@ export default class SignUp extends Component {
             this.state.avatar === '' ? <Image circle style={{ borderRadius: 50, width: 100, height: 100 }} source={require('../images/riley.jpg')} /> :
             this.state.avatar !== '' && <Image circle style={{ borderRadius: 50, width: 100, height: 100 }} source={this.state.avatar} />
           }
-          <Badge style={{ position: 'absolute' }}><Text>2</Text></Badge>
+          <Badge style={{ position: 'absolute', backgroundColor: 'rgba(41, 128, 185,0.8)' }}>
+            <Icon name="add" style={{ fontSize: 20, color: '#fff', lineHeight: 25 }}/>
+          </Badge>
           </TouchableOpacity>
         {/* <Image style={styles.logoImage} source={require('../images/lens.png')} /> */}
         {/* <Text style={styles.logo}>Snapppy</Text> */}
@@ -130,7 +139,7 @@ export default class SignUp extends Component {
             rounded
             style={styles.item}
           >
-            <Icon active name="person" style={{ color: '#2980b9' }} />
+            <Icon active name="person" style={{ color: BLUE_COLOR }} />
             <Input
               onChangeText={name => this.setState({ name })}
               value={this.state.name}
@@ -145,7 +154,7 @@ export default class SignUp extends Component {
             rounded
             style={styles.item}
           >
-            <Icon active name="at" style={{ color: '#2980b9' }} />
+            <Icon active name="at" style={{ color: BLUE_COLOR }} />
             <Input
               onChangeText={email => this.setState({ email })}
               value={this.state.email}
@@ -160,7 +169,7 @@ export default class SignUp extends Component {
             rounded
             style={styles.item}
           >
-            <Icon active name="key" style={{ color: '#2980b9' }} />
+            <Icon active name="key" style={{ color: BLUE_COLOR }} />
             <Input
               onChangeText={password => this.setState({ password })}
               value={this.state.password}
@@ -178,7 +187,7 @@ export default class SignUp extends Component {
             style={styles.item}
             error={this.state.password !== this.state.repassword}
           >
-            <Icon active name="key" style={{ color: '#2980b9' }} />
+            <Icon active name="key" style={{ color: BLUE_COLOR }} />
             <Input
               onChangeText={repassword => this.setState({ repassword })}
               value={this.state.repassword}
@@ -229,7 +238,7 @@ const styles = StyleSheet.create({
   logo: {
     fontSize: 52,
     textAlign: 'center',
-    color: '#2980b9',
+    color: BLUE_COLOR,
     fontFamily: 'Lobster-Regular'
   },
   subtitle: {
@@ -241,6 +250,6 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     width: 250,
-    backgroundColor: '#2980b9'
+    backgroundColor: BLUE_COLOR
   }
 });
