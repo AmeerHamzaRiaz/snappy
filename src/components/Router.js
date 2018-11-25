@@ -1,7 +1,7 @@
 import { createDrawerNavigator, DrawerItems } from 'react-navigation';
 import { StyleSheet, Image, StatusBar, AsyncStorage, Alert } from 'react-native';
 import React, { Component } from 'react';
-import { Header, Container, Content, Text, Body, Button } from 'native-base';
+import { Header, Container, Content, Text, Body, Button, Icon } from 'native-base';
 import Home from './Home';
 
 const BLUE_STATUS = '#2980b9';
@@ -9,18 +9,25 @@ const BLUE_COLOR = '#3498db';
 
 
 export default class Router extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        Username: ''
-      };
-    }
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      Username: ''
+    };
+  }
+  
+  onButtonPress = () => {
+    Alert.alert('You Pressed Logged Out');
+  }
 
   render() {
-    return (
-        <MyApp screenProps={{ Username: 'Username' }} />
-    );
+      return (
+          <MyApp screenProps={{ Username: 'Username' }} />
+      );
   }
+
+
 }
 
 const CustomDrawerContentComponent = (props) => (
@@ -41,10 +48,13 @@ const CustomDrawerContentComponent = (props) => (
       <DrawerItems {...props} />
       <Button
         rounded
-        warning
-        // onPress={() => { AsyncStorage.clear(); }}
+        block
+        iconLeft
+        // onPress={this.onButtonPress()} Big Problem here <---------- Need to pass this as a screenProp
+        style={styles.button}
       >
-        <Text> Log Out </Text>
+        <Text style={{ color: 'white' }}>Log Out</Text>
+        <Icon name="log-out" />
       </Button>
     </Content>
   </Container>
@@ -97,5 +107,11 @@ const MyApp = createDrawerNavigator({
         fontSize: 22, 
         color: 'white',
         fontWeight: 'bold'
+      },
+      button: {
+        marginTop: 20,
+        width: 220,
+        marginLeft: 18,
+        backgroundColor: BLUE_COLOR
       }
     });

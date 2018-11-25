@@ -37,11 +37,20 @@ export default class Login extends Component {
     const { email, password } = this.state;
     //first check inputs then set
     this.setState({ loading: true });
+
     if (!this.validateEmail(email) || email.length === 0 || password.length < 5) {
+      //If login Credentials are wrong
        Alert.alert('Missing or Invalid Fields', 'Enter valid email and password');
        this.setState({ loading: false });
+    } else {
+    // else if Login Credentials are right
+    setTimeout(() => {
+      this.setState({ loading: false });
+      this.props.changeLoginStatus();
+      }, 10000);
+
+  
     }
-    // Alert.alert(email, password);
   }
 
   validateEmail = (email) => {

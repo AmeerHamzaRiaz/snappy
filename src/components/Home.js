@@ -8,8 +8,8 @@ const BLUE_COLOR = '#3498db';
 
 export default class Home extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'History',
-    drawerLabel: 'History',
+    title: 'Home',
+    drawerLabel: 'Home',
     drawerIcon: ({ tintColor }) => (
       <Icon name='home' style={{ color: tintColor, fontSize: 22 }} />
     )

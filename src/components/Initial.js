@@ -12,15 +12,19 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: false
     };
   }
+  changeLoginStatus = () => {
+    this.setState({ isLoggedIn: true });
+  }
+
   renderContent = () => {
     switch (this.state.isLoggedIn) {
       case true:
         return (<Router />);
       case false:
-        return (<Login navigation={this.props.navigation} />);
+        return (<Login changeLoginStatus={this.changeLoginStatus} navigation={this.props.navigation} />);
       default:
         return (<Spinner size="large" color="orange" />);
     }
